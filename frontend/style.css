@@ -1,0 +1,149 @@
+/*
+  style.css  -  the CSS file (colours, spacing and layout)
+  Each block looks like:   what-to-style { property: value; }
+*/
+
+/* ----- Whole page ----- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;                      /* remove default space around the page */
+    background: #f2f4f8;            /* light grey background */
+    color: #222;
+}
+
+/* ----- Top banner ----- */
+header {
+    background: #1f3a5f;            /* dark blue */
+    color: white;
+    padding: 24px 32px;
+}
+
+header h1 { margin: 0; font-size: 24px; }
+header p  { margin: 6px 0 0; opacity: 0.8; }
+
+/* ----- Centre the content ----- */
+main {
+    max-width: 1000px;
+    margin: 24px auto;              /* auto left/right = centred */
+    padding: 0 16px;
+}
+
+/* ----- White boxes ----- */
+.box {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.box h2 { margin-top: 0; font-size: 18px; }
+
+/* ----- Small grey text ----- */
+.small { font-size: 13px; color: #666; }
+
+/* ----- Fact cards (row of 3) ----- */
+.facts { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.fact {
+    flex: 1;                        /* all cards share the width equally */
+    min-width: 150px;
+    background: #f2f4f8;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.fact b    { display: block; font-size: 20px; }
+.fact span { font-size: 13px; color: #666; }
+
+/* ----- Form ----- */
+form {
+    display: grid;                  /* put fields in a grid */
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;         /* keep padding inside the width */
+}
+
+button {
+    grid-column: 1 / -1;            /* button uses the full row */
+    padding: 12px;
+    background: #1f3a5f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover { background: #2d5285; }   /* colour change when mouse is over it */
+
+/* ----- Prediction result (hidden until script.js shows it) ----- */
+#result {
+    display: none;
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 17px;
+}
+
+.result-fraud { background: #fde8e8; color: #9b1c1c; }   /* red   */
+.result-safe  { background: #e6f4ea; color: #1b6b3a; }   /* green */
+
+/* ----- Table ----- */
+table { width: 100%; border-collapse: collapse; }
+
+th, td {
+    padding: 9px;
+    border-bottom: 1px solid #e3e6eb;
+    text-align: right;
+}
+
+th:first-child, td:first-child { text-align: left; }   /* model name on the left */
+
+tr.best td { background: #e6f4ea; font-weight: bold; }   /* highlight best model */
+
+/* ----- Charts ----- */
+.charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.charts img {
+    width: 100%;
+    border: 1px solid #e3e6eb;
+    border-radius: 8px;
+}
+
+figcaption {
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    margin-top: 4px;
+}
+
+figure { margin: 0; }
+
+/* ----- Red message shown when the Python server is not running ----- */
+.error-box {
+    background: #fde8e8;
+    color: #9b1c1c;
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}

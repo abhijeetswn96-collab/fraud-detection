@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+  index.html  -  the HTML file (page structure only)
+
+  HOW IT IS CONNECTED:
+    <link ... style.css>    -> loads the colours and layout (CSS file)
+    <script src="script.js"> -> loads the JavaScript file, which
+                                 - asks Python (app.py) for results and fills
+                                   the empty boxes below (ids: facts, models, charts)
+                                 - sends the form to Python and shows the answer
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Payments Fraud Detection</title>
+
+    <!-- Connect the CSS file (same folder) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== Top banner ===== -->
+    <header>
+        <h1>Online Payments Fraud Detection</h1>
+        <p>Machine learning model that finds fraudulent payments</p>
+    </header>
+
+    <main>
+
+        <!-- Shown by script.js if the Python server is not running -->
+        <div id="server-error" class="error-box" style="display:none"></div>
+
+        <!-- ===== Box 1: dataset facts (script.js fills this) ===== -->
+        <section class="box">
+            <h2>1. About the data</h2>
+            <div class="facts" id="facts">Loading...</div>
+            <p class="small" id="source"></p>
+        </section>
+
+        <!-- ===== Box 2: test a payment ===== -->
+        <section class="box">
+            <h2>2. Test a payment</h2>
+            <form id="payment-form">
+
+                <div>
+                    <label>Type</label>
+                    <select name="type">
+                        <option>TRANSFER</option>
+                        <option>CASH_OUT</option>
+                        <option>PAYMENT</option>
+                        <option>CASH_IN</option>
+                        <option>DEBIT</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Step (hour number)</label>
+                    <input type="number" name="step" value="1" min="1">
+                </div>
+
+                <div>
+                    <label>Amount</label>
+                    <input type="number" name="amount" value="181" step="any">
+                </div>
+
+                <div>
+                    <label>Sender balance BEFORE</label>
+                    <input type="number" name="oldbalanceOrg" value="181" step="any">
+                </div>
+
+                <div>
+                    <label>Sender balance AFTER</label>
+                    <input type="number" name="newbalanceOrig" value="0" step="any">
+                </div>
+
+                <div>
+                    <label>Receiver name (M = merchant)</label>
+                    <input type="text" name="nameDest" value="C38997010">
+                </div>
+
+                <div>
+                    <label>Receiver balance BEFORE</label>
+                    <input type="number" name="oldbalanceDest" value="21182" step="any">
+                </div>
+
+                <div>
+                    <label>Receiver balance AFTER</label>
+                    <input type="number" name="newbalanceDest" value="0" step="any">
+                </div>
+
+                <button type="submit">Check this payment</button>
+            </form>
+
+            <!-- The answer appears here (script.js fills it in) -->
+            <div id="result"></div>
+        </section>
+
+        <!-- ===== Box 3: model scores (script.js fills the table) ===== -->
+        <section class="box">
+            <h2>3. How good are the models?</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Accuracy</th>
+                        <th>Precision</th>
+                        <th>Recall</th>
+                        <th>F1</th>
+                    </tr>
+                </thead>
+                <tbody id="models"></tbody>
+            </table>
+            <p class="small">
+                Precision = of the payments we called fraud, how many really were.
+                Recall = of all real fraud, how many we caught.
+                F1 = one score mixing both (the green row is the best).
+            </p>
+        </section>
+
+        <!-- ===== Box 4: charts (script.js fills this) ===== -->
+        <section class="box">
+            <h2>4. Charts</h2>
+            <div class="charts" id="charts"></div>
+        </section>
+
+    </main>
+
+    <!-- Connect the JavaScript file (at the end so the page above loads first) -->
+    <script src="script.js"></script>
+</body>
+</html>
